@@ -1,0 +1,28 @@
+{% block title %}#2 Magic Assets - Mixture Tips{% endblock %}
+{% block class %}two{% endblock %}
+{% block content %} 
+	<h2>#2 &ndash; Magic Assets</h2>
+	<p>Mixture will find your assets for you, enter as much or as little of the path as necessary.</p>
+	<p>The "Asset Url" is a small detail but a useful feature:</p>
+	<p><em>- Liquid</em></p>
+	<pre><code>{% raw %}{{ "filename" | asset_url }}{% endraw %}</code></pre>
+	<p><em>- Haml</em></p>
+	<pre><code>{% raw %}:Asseturl
+  %img{:src => "filename"}
+{% endraw %}</code></pre>
+	<p>Enter just the filename and Mixture will complete the path for you, if you have many files with the same name, the more path you enter the narrower the search.</p>
+	<p>Asset URL will return the path as a string, but if you're using Liquid and need a tag we've also created some additional filters which you can simply chain on:</p>
+	<p><em>- asset url with image tag</em></p>
+	<pre><code>{% raw %}{{ "example.jpeg" | asset_url | image_tag }}{% endraw %}</code></pre>
+	<p><em>- example output</em></p>
+	<pre><code>&lt;img src="/assets/img/example.jpeg" /&gt;</code></pre>
+	<p><em>- asset url with script tag</em></p>
+	<pre><code>{% raw %}{{ "example.js" | asset_url | script_tag }}{% endraw %}</code></pre>
+	<p><em>- example output</em></p>
+	<pre><code>&lt;script src="/assets/js/example.min.js"&gt;&lt;/script&gt;</code></pre>
+	<p><em>- asset url with style tag</em></p>
+	<pre><code>{% raw %}{{ "example.css" | asset_url | stylesheet_tag }}{% endraw %}</code></pre>
+	<p><em>- example output</em></p>
+	<pre></code>&lt;link href="/assets/css/example.min.css" rel="stylesheet" type="text/css" media="all"/&gt;</code></pre>
+	<p>In both Liquid &amp; Haml if you're referencing a stylesheet or script, Mixture will default to the minified version (if it's available). This functionality can be disabled by placing Mixture in "debug" mode via the mixture json settings file.</p>
+{% endblock %}

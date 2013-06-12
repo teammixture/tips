@@ -1,0 +1,41 @@
+{% block title %}#1 Clever Includes in Liquid - Mixture Tips{% endblock %}
+{% block class %}one{% endblock %}
+{% block content %} 
+	<h2>#1 &ndash; Clever Includes with Liquid</h2>
+	<p>Includes in Mixture with Liquid are super simple:</p>
+	<pre><code>{% raw %}{% include "filename" %}{% endraw %}</code></pre>
+	<p>When used with <a href="http://docs.mixture.io/models">model</a> data or variables they are even more powerful and a great way to keep your code dry.</p><p>When you consume a model or set a variable within Mixture, that data is available througout the page, any includes and the page layout.</p>
+	<p>The following is a simple example of a page consuming a model:</p>
+	<p><em>- example.json</em></p>
+	<pre><code>{
+  "people": [
+    { "name": "Neil Kinnish" },
+    { "name": "Pete Nelson" }
+  ]
+}</code></pre>
+	<p><em>- example.liquid (the page consuming &amp; looping through the model)</em></p>
+	<pre><code>{% raw %}&lt;ul&gt;
+{% for person in model.people %}
+  &lt;li&gt;{{ person.name }}&lt;/li&gt;
+{% endfor %}
+&lt;/ul&gt;{% endraw %}</code></pre>
+	<p><em>- output</em></p>
+	<pre><code>&lt;ul&gt;
+  &lt;li&gt;Neil Kinnish&lt;/li&gt;
+  &lt;li&gt;Pete Nelson&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+	<p>Although this data is available to any include and you could even use an include within the for loop, there is a little known feature of Liquid that allows you to pass through specific data to an include, and best of all if this data is an array it will automatically handle the loop logic.</p>
+	<p>An example of this feature cosuming the same data as above:</p>
+	<p><em>- example.liquid (the page calling an include and passing data)</em></p>
+	<pre><code>{% raw %}&lt;ul&gt;
+  {% include "people" with model.people %}
+&lt;/ul&gt;{% endraw %}</code></pre>
+	<p><em>- people.liquid (the include)</em></p>
+	<pre>{% raw %}&lt;li&gt;{{ people.name }}&lt;/li&gt;{% endraw %}</code></pre>
+	<p><em>- output</em></p>
+	<pre><code>&lt;ul&gt;
+  &lt;li&gt;Neil Kinnish&lt;/li&gt;
+  &lt;li&gt;Pete Nelson&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+	<p>You can pass through a string, array or an object. It's worth noting that the namespace used in the include - "people" - in this feature is always the include page name. As an example if the item was a string or a simple string array you would just use the namespace.</p>
+{% endblock %}

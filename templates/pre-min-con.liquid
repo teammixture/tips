@@ -1,0 +1,29 @@
+{% block title %}#3 Preprocessing, Minification &amp; Concatenation - Mixture Tips{% endblock %}
+{% block class %}three{% endblock %}
+{% block content %} 
+	<h2>#3 &ndash; Preprocessing, Minification &amp; Concatenation</h2>
+	<p>Mixture has built-in and automatic support for preprocessing (Sass - including Compass support, LESS, CoffeScript &amp; Stylus), minification (js &amp; css) and support for concatenation via a special "Mix" type.</p>
+	<p>You can fine grain the directories and files affected using the mixture.json settings file and "preprocessorLocations".</p>
+	<p><em>- single location</em></p>
+	<pre><code>"preprocessorLocations": "assets/sass"</pre></code>
+	<p><em>- multiple locations</em></p>
+	<pre><code>"preprocessorLocations": "assets/sass,assets/coffeescript"</pre></code>
+	<p>* must be location(s) within the project and all files and directories below are affected.</p>
+	<p>You can also set the output location for preprocessed styles and script files:</p>
+	<p><em>- script output location</em></p>
+	<pre><code>"preprocessorScriptOutput": "assets/js"</code></pre>
+	<p><em>- style output location</em></p>
+	<pre><code>"preprocessorStyleOutput": "assets/css"</pre></code>
+	<p>* if null, then the output will be saved in the same location as the source</p>
+	<p>Mixture will also let you combine many Js files or Css files in to one, this is easily achieved via the "Mix" file type.</p>
+	<p><em>- mix css file</em></p>
+	<pre><code>filename.mix.css</code></pre>
+	<p><em>- contents</em></p>
+	<pre><code>@import "example1.css";
+@import "example2.css";</code></pre>
+	<p><em>- will merge the 2 import files and output</em></p>
+	<pre><code>filename.css</code></pre>
+	<p>* if the output file location is within preprocessLocations, an additional minified version will be created</p>
+	<p>If you wish to use Compass with Mixture, you can - we even support plugins and frameworks.</p>
+	<p>You can point Mixture at custom installs of Ruby &amp; Compass this will give you total flexibility.</p>
+{% endblock %}
